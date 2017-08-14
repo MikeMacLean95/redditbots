@@ -11,7 +11,10 @@ import requests
 
 path = "/home/michael-maclean/workspace/python/redditbots/commented.txt"
 
-header = "***Clean up Your Shit***\n"
+headera = "***Clean up Your Shit***\n"
+headerb = "***Shut up Todd***\n"
+
+header = 1
 footer = "\n | ^I'm ^a ^bot ^created ^by ^u/krichaelsquad |"
 
 def authenitcate():
@@ -21,6 +24,7 @@ def authenitcate():
     return reddit
 
 def run_bojackbot(reddit):
+    header=1
     print("Getting 250 comments...\n")
 
     for comment in reddit.subreddit('bojackhorseman').comments(limit=250):
@@ -30,7 +34,12 @@ def run_bojackbot(reddit):
 
             if comment.id not in file_obj_r.read().splitlines():
                 print("Unique link posting comment\n")
-                comment.reply(header + footer)
+                if (header == 1):
+                        comment.reply(headera + footer)
+                        header= 2
+                else:
+                        comment.reply(headerb + footer)
+                        header = 1
                 file_obj_r.close()
 
                 file_obj_w = (open(path, 'a+'))
@@ -38,7 +47,7 @@ def run_bojackbot(reddit):
                 file_obj_w.close()
             else:
                 print("Already visited link...No reply needed\n")
-        time.sleep(10)
+        time.sleep(0)
     print("Waiting 60 seconds...\n")
     time.sleep(60)
 
