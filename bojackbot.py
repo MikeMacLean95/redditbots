@@ -12,7 +12,7 @@ import requests
 path = "/home/michael-maclean/workspace/python/redditbots/commented.txt"
 
 header = "***Clean up Your Shit***\n"
-footer = "\n ^I'm a bot created by u/krichaelsquad | Summon me with 'Hey Todd!'"
+footer = "\n | ^I'm ^a ^bot ^created ^by ^u/krichaelsquad |"
 
 def authenitcate():
     print("Authenticating...\n")
@@ -23,9 +23,8 @@ def authenitcate():
 def run_bojackbot(reddit):
     print("Getting 250 comments...\n")
 
-    for comment in reddit.subreddit('test').comments(limit=250):
-        match = re.findall("Hey Todd!")
-        if match:
+    for comment in reddit.subreddit('bojackhorseman').comments(limit=250):
+        if "Hey Todd!" in comment.body:
             print("Found in comment with comment ID: " + comment.id)
             file_obj_r = open(path, 'r')
 
@@ -43,10 +42,10 @@ def run_bojackbot(reddit):
     print("Waiting 60 seconds...\n")
     time.sleep(60)
 
-    def main():
-        reddit = authenitcate()
-        while True:
-            run_bojackbot(reddit)
+def main():
+    reddit = authenitcate()
+    while True:
+        run_bojackbot(reddit)
 
-    if __name__ == '__main__':
-        main()
+if __name__ == '__main__':
+    main()
