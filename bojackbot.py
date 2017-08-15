@@ -47,7 +47,7 @@ def run_bojackbot(reddit):
                 file_obj_w.close()
             else:
                 print("Already visited link...No reply needed\n")
-        time.sleep(0)
+        time.sleep(1)
     print("Waiting 60 seconds...\n")
     time.sleep(60)
 
